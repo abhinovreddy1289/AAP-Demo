@@ -13,7 +13,7 @@ rules:
       - name: Run nginx playbook
         run_playbook:
           name: nginx.yml
-          project: MyGitProject
+          project: AAP Demo
           inventory:
             hosts:
               localhost:
