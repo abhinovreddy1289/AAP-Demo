@@ -1,20 +1,14 @@
 ---
-name: Restart nginx when down  # required
-hosts: all                     # optional, but usually set
-sources:
-  - ansible.eda.webhook:
-      host: 0.0.0.0
-      port: 5000
+- name: Restart nginx when down
+  hosts: all
+  sources:
+    - ansible.eda.webhook:
+        host: 0.0.0.0
+        port: 5000
 
-rules:
-  - name: Restart nginx       # rule name
-    hosts: localhost          # target for the playbook
-    tasks:
-      - name: Run nginx playbook
+  rules:
+    - name: Restart nginx
+      condition: event.payload.alerts[0].labels.alertname == "NginxDown"
+      action:
         run_playbook:
-          name: nginx.yml
-          project: AAP Demo
-          inventory:
-            hosts:
-              localhost:
-                ansible_connection: local
+          name: ../nginx.yml
