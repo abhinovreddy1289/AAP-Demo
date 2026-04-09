@@ -6,13 +6,15 @@
         host: 0.0.0.0
         port: 5000
 
-  rules:
-    - name: Restart nginx
-      condition: event.payload.alerts[0].labels.alertname == "NginxDown"
-      actions:
-        - run_playbook:
-            name: ../nginx.yml
-            inventory:
-              hosts:
-                localhost:
-                  ansible_connection: local
+rules:
+  - name: Restart nginx
+    hosts: localhost
+    tasks:
+      - name: Run nginx playbook
+        run_playbook:
+          name: nginx.yml
+          project: MyGitProject
+          inventory:
+            hosts:
+              localhost:
+                ansible_connection: local
