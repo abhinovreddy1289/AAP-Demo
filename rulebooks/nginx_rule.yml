@@ -9,6 +9,7 @@
   rules:
     - name: Restart nginx
       condition: event.payload.alerts[0].labels.alertname == "NginxDown"
-      action:
-        run_playbook:
-          name: nginx.yml
+      actions:
+        - run_playbook:
+            name: nginx.yml
+            inventory: "localhost,"
