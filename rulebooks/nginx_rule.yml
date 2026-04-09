@@ -10,5 +10,6 @@
     - name: Restart nginx
       condition: event.payload.alerts[0].labels.alertname == "NginxDown"
       action:
-        run_playbook:
-          name: ../nginx.yml
+        run_job_template:
+          name: Restart Nginx
+          organization: Default
