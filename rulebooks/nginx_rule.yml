@@ -12,4 +12,7 @@
       actions:
         - run_playbook:
             name: ../nginx.yml
-            inventory: "localhost,"
+            inventory:
+              hosts:
+                localhost:
+                  ansible_connection: local
