@@ -11,5 +11,5 @@
       condition: event.payload.alerts[0].labels.alertname == "NginxDown"
       actions:
         - run_playbook:
-            name: nginx.yml
+            name: ../nginx.yml
             inventory: "localhost,"
