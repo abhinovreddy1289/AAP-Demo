@@ -1,6 +1,6 @@
 ---
 - name: Restart nginx when down
-  hosts: all
+  hosts: localhost
   sources:
     - ansible.eda.webhook:
         host: 0.0.0.0
@@ -8,7 +8,10 @@
 
   rules:
     - name: Restart nginx
-      condition: event.payload.alerts[0].labels.alertname == "NginxDown"
+      condition: >
+        event.payload is defined and
+        event.payload.alerts is defined and
+        event.payload.alerts[0].labels.alertname == "NginxDown"
       action:
         run_job_template:
           name: Restart Nginx
