@@ -1,8 +1,0 @@
----
-- name: Restart nginx container
-  hosts: all
-  become: true
-  tasks:
-    - name: Restart nginx container
-      ansible.builtin.command:
-        cmd: docker restart nginx
